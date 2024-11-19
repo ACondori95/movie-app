@@ -89,7 +89,6 @@ async function getMovieById(id) {
   const {data: movie} = await api(`movie/${id}`);
 
   const movieImgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-  console.log(movieImgUrl);
   headerSection.style.background = `
     linear-gradient(
       182deg,
@@ -104,4 +103,13 @@ async function getMovieById(id) {
   movieDetailScore.textContent = movie.vote_average;
 
   createCategories(movie.genres, movieDetailCategoriesList);
+
+  getRelatedMoviesId(id);
+}
+
+async function getRelatedMoviesId(id) {
+  const {data} = await api(`movie/${id}/recommendations`);
+  const relatedMovies = data.results;
+
+  createMovies(relatedMovies, relatedMoviesContainer);
 }
