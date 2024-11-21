@@ -31,6 +31,12 @@ function createMovies(movies, container, lazyLoad = false) {
       lazyLoad ? "data-img" : "src",
       `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
     );
+    movieImg.addEventListener("error", () => {
+      movieImg.setAttribute(
+        "src",
+        "https://static.platzi.com/static/images/error/img404.png"
+      );
+    });
 
     if (lazyLoad) {
       lazyLoader.observe(movieImg);
@@ -81,11 +87,11 @@ async function getMoviesByCategory(id) {
   const {data} = await api("discover/movie", {params: {with_genres: id}});
   const movies = data.results;
 
-  createMovies(movies, genericSection);
+  createMovies(movies, genericSection, true);
 }
 
 async function getMoviesBySearch(query) {
-  const {data} = await api("search/movie", {params: query});
+  const {data} = await api("search/movie", {params: {query}});
   const movies = data.results;
 
   createMovies(movies, genericSection);
@@ -104,7 +110,7 @@ async function getMovieById(id) {
   const movieImgUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   headerSection.style.background = `
     linear-gradient(
-      182deg,
+      180deg,
       rgba(0, 0, 0, 0.35) 19.27%,
       rgba(0, 0, 0, 0) 29.17%
     ),

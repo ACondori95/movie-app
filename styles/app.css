@@ -137,6 +137,7 @@ footer {
 
 .movie-img {
   border-radius: 8px;
+  min-height: 175px;
 }
 
 .categoriesPreview-list,
@@ -416,6 +417,15 @@ footer {
 .relatedMovies-scrollContainer .movie-container {
   display: inline-block;
   margin-right: 8px;
+}
+
+.relatedMovies-scrollContainer .movie-container--loading {
+  width: 125px;
+  min-width: 125px;
+  max-width: 125px;
+  height: 187.5px;
+  min-height: 187.5px;
+  max-height: 187.5px;
 }
 
 .relatedMovies-scrollContainer .movie-img {
