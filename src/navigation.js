@@ -3,7 +3,7 @@ let page = 1;
 let infiniteScroll;
 
 searchFormBtn.addEventListener("click", () => {
-  location.hash = `#search=${searchFormInput.value}`;
+  location.hash = "#search=" + searchFormInput.value;
 });
 
 trendingBtn.addEventListener("click", () => {
